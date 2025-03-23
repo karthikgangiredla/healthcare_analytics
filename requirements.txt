@@ -3,6 +3,7 @@ numpy
 google-cloud-bigquery
 google-auth
 apache-airflow
-pandera
+plotly
+pyarrow
+db-dtypes
 streamlit
-tabulate
