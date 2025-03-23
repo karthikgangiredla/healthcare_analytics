@@ -1,0 +1,8 @@
+pandas
+numpy
+google-cloud-bigquery
+google-auth
+apache-airflow
+pandera
+streamlit
+tabulate
