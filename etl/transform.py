@@ -30,8 +30,6 @@ condition_counts = conditions_df.groupby("ENCOUNTER").size().reset_index(name="N
 encounters_df = encounters_df.merge(condition_counts, left_on="ENCOUNTER_ID", right_on="ENCOUNTER", how="left")
 encounters_df["NUM_CONDITIONS"] = encounters_df["NUM_CONDITIONS"].fillna(0)
 
-# Rename encounter ID for clarity
-
 
 # Add provider specialty
 encounters_df = encounters_df.merge(providers_df[["PROVIDER_ID", "SPECIALTY"]],
