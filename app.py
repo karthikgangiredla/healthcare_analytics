@@ -3,13 +3,14 @@ import pandas as pd
 from google.cloud import bigquery
 import os
 import plotly.express as px
-
-# Auth
+from dotenv import load_dotenv
+load_dotenv()
+# Set up your service account credentials
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"C:\Users\karth\AppData\Roaming\gcloud\application_default_credentials.json"
-project_id = "healthcareanalysis-454507"
-dataset_id = "healthcare_db"
+# Project and dataset details
+project_id = os.getenv("project_id")
+dataset_id = os.getenv("dataset_id")
 client = bigquery.Client(project=project_id)
-
 # UI Setup
 st.set_page_config(page_title="Healthcare Analytics Dashboard", layout="wide")
 st.title(" Healthcare Provider Analytics Dashboard")
