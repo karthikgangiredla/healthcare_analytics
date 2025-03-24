@@ -43,5 +43,5 @@ for name, path in file_paths.items():
         })
  
 summary_df = pd.DataFrame(extract_summary)
-print(summary_df.head(18))
+print(summary_df.head(18)) #
 
