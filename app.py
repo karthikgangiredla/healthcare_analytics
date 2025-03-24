@@ -12,10 +12,10 @@ client = bigquery.Client(project=project_id)
 
 # UI Setup
 st.set_page_config(page_title="Healthcare Analytics Dashboard", layout="wide")
-st.title("🏥 Healthcare Provider Analytics Dashboard")
+st.title(" Healthcare Provider Analytics Dashboard")
 
 # Sidebar Navigation
-st.sidebar.title("📊 Navigation")
+st.sidebar.title(" Navigation")
 navigation_options = [
     "Provider Dashboard", "Patient Dashboard", "Organization Dashboard", "Advanced Analytics", "Insights",
     "Table Explorer"
@@ -49,7 +49,7 @@ fact_df = load_data("fact_encounters")
 
 # ============== NAVIGATION HANDLER ==============
 if selected_nav == "Provider Dashboard":
-    st.subheader("🧑‍⚕️ Provider Performance")
+    st.subheader(" Provider Performance")
     specialty = st.selectbox("Filter by Specialty", provider_df["specialty"].unique())
     filtered = provider_df[provider_df["specialty"] == specialty]
     st.metric("Total Providers", len(filtered))
@@ -67,7 +67,7 @@ elif selected_nav == "Patient Dashboard":
     st.dataframe(patient_filtered, use_container_width=True)
 
 elif selected_nav == "Organization Dashboard":
-    st.subheader("🏢 Organization Analysis")
+    st.subheader(" Organization Analysis")
     selected_state = st.selectbox("Select State", org_df["state"].unique())
     org_filtered = org_df[org_df["state"] == selected_state]
     st.plotly_chart(px.bar(org_filtered.sort_values("total_encounters", ascending=False).head(10),
@@ -84,7 +84,7 @@ elif selected_nav == "Organization Dashboard":
     st.dataframe(org_filtered, use_container_width=True)
 
 elif selected_nav == "Advanced Analytics":
-    st.subheader("📊 Advanced Condition & Age Analysis")
+    st.subheader(" Advanced Condition & Age Analysis")
     fact_patient_df = fact_df.merge(patient_df, on="patient_id")
     fact_patient_df["age_group"] = pd.cut(fact_patient_df["approx_age"],
                                           bins=[0, 17, 34, 49, 64, 200],
@@ -100,7 +100,7 @@ elif selected_nav == "Advanced Analytics":
     st.dataframe(age_group_stats, use_container_width=True)
 
 elif selected_nav == "Insights":
-    st.subheader("📈 Demographic & Time-Based Insights")
+    st.subheader(" Demographic & Time-Based Insights")
     fact_patient_df = fact_df.merge(patient_df, on="patient_id")
     fact_patient_df["age_group"] = pd.cut(fact_patient_df["approx_age"],
                                           bins=[0, 17, 34, 49, 64, 200],
@@ -119,7 +119,7 @@ elif selected_nav == "Insights":
     st.dataframe(monthly_trends, use_container_width=True)
 
 elif selected_nav == "Table Explorer":
-    st.subheader("📄 Table Explorer")
+    st.subheader(" Table Explorer")
     selected_table = st.selectbox("Choose Table to Preview", table_options)
     if selected_table:
         st.dataframe(preview_table(selected_table), use_container_width=True)
