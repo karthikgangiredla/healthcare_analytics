@@ -1,14 +1,16 @@
 from google.cloud import bigquery
 import os
 
-# Set up service account or default credentials
+from dotenv import load_dotenv
+load_dotenv()
+
+# Set up your service account credentials
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"C:\Users\karth\AppData\Roaming\gcloud\application_default_credentials.json"
 
-# BigQuery setup
-project_id = "healthcareanalysis-454507"
-dataset_id = "healthcare_db"
+# Project and dataset details
+project_id = os.getenv("project_id")
+dataset_id = os.getenv("dataset_id")
 client = bigquery.Client(project=project_id)
-
 # Dashboard views
 dashboard_views = {
     "view_provider_dashboard": f"""
@@ -66,6 +68,6 @@ for name, sql in dashboard_views.items():
     print(f"Creating dashboard view: {name}...")
     job = client.query(sql)
     job.result()
-    print(f"✅ Created: {name}")
+    print(f" Created: {name}")
 
-print("✅ All dashboard views created successfully.")
+print("All dashboard views created successfully.")

@@ -1,12 +1,15 @@
 from google.cloud import bigquery
 import os
 
-# Set credentials (make sure this is configured correctly)
+from dotenv import load_dotenv
+load_dotenv()
+
+# Set up your service account credentials
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"C:\Users\karth\AppData\Roaming\gcloud\application_default_credentials.json"
 
-# Setup
-project_id = "healthcareanalysis-454507"
-dataset_id = "healthcare_db"
+# Project and dataset details
+project_id = os.getenv("project_id")
+dataset_id = os.getenv("dataset_id")
 client = bigquery.Client(project=project_id)
 
 # SQL for all tables
@@ -74,6 +77,6 @@ for name, sql in sql_statements.items():
     print(f"Creating table: {name}...")
     job = client.query(sql)
     job.result()
-    print(f"✅ {name} created.")
+    print(f" {name} created.")
 
-print("✅ All fact and dimension tables created successfully.")
+print(" All fact and dimension tables created successfully.")

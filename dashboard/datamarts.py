@@ -1,14 +1,15 @@
 from google.cloud import bigquery
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
-# Set credentials
+# Set up your service account credentials
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"C:\Users\karth\AppData\Roaming\gcloud\application_default_credentials.json"
 
-# Setup
-project_id = "healthcareanalysis-454507"
-dataset_id = "healthcare_db"
+# Project and dataset details
+project_id = os.getenv("project_id")
+dataset_id = os.getenv("dataset_id")
 client = bigquery.Client(project=project_id)
-
 # Define SQL for each data mart
 mart_queries = {
     "mart_provider_productivity": f"""
@@ -42,6 +43,6 @@ for name, sql in mart_queries.items():
     print(f"Creating data mart: {name}...")
     job = client.query(sql)
     job.result()
-    print(f"✅ Created: {name}")
+    print(f" Created: {name}")
 
-print("✅ All data marts created.")
+print(" All data marts created.")
