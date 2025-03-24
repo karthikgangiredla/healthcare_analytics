@@ -1,6 +1,5 @@
 from google.cloud import bigquery
 import os
-
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"C:\Users\karth\AppData\Roaming\gcloud\application_default_credentials.json"
 
 project_id = "healthcareanalysis-454507"
@@ -27,4 +26,4 @@ with open(csv_file_path, "rb") as file:
 load_job.result()  
 
 table = client.get_table(table_ref)
-print(f"✅ Loaded {table.num_rows} rows into {table_ref}")
+print(f" Loaded {table.num_rows} rows into {table_ref}")
