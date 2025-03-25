@@ -25,6 +25,7 @@ Avg conditions per age group
 Encounter trends over time
 Procedure volume vs encounter duration
 Gender comparison of conditions
+```bash
 
 PROJECT STRUCTURE
 project-root/
